@@ -1,4 +1,4 @@
-module mod10_counter(
+module mod6_counter(
     input wire [3:0] input_number,
     input wire loadn,
     input wire clearn,
@@ -19,34 +19,36 @@ module mod10_counter(
         begin
             if(enable)
                 begin
-                    if(number == 4'b0000)
+                    if(number == 4'd0)
                         begin
-                            number <= 4'b1001;
+                            number <= 4'd5;
                         end
                     else
                         begin
                             number <= number-1;
                         end
                 end
-            else
-                begin
-                    if(!loadn)
-                        begin
-                            number <= input_number;
-                        end
-                 end
         end 
+
+    always@(posedge clock)
+        begin
+            if(!loadn & !enable)
+                begin
+                    number <= input_number;
+                end
+        end
 
     always@(negedge clearn)
         begin
             if(!clearn & !enable)
                 begin
-                    number <= 4'b0000;
+                    number <= 4'd0;
                 end
         end
 
 endmodule
 
+//Única diferença do mod10 pro mod6 é que a contagem decrementa a partir do 6.
 //Esse código faz a contagem descrescente de 9 até 1 enquanto o sinal de enable está ativo. 
 //Esse código faz com que o número de input passe para o próximo contador quando estamos com o timer completo.
 //Esse código reinicia o valor do dígito quando o valor de clear (ativo em LOW) é 0. 
