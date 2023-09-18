@@ -1,5 +1,5 @@
-`include "./mod6/mod6_counter.v"
-`include "./mod10/mod10_counter.v"
+`include "timer/mod6/mod6_counter.v"
+`include "timer/mod10/mod10_counter.v"
 
 module timer(
     input wire [3:0] number,

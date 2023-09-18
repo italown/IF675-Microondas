@@ -1,7 +1,7 @@
-`include "./mod100/mod100.v"
-`include "./mux/mux.v"
-`include "./debounce/debounce.v"
-`include "./keyboard/keyboard.v"
+`include "encoder/mod100/mod100.v"
+`include "encoder/mux/mux.v"
+`include "encoder/debounce/debounce.v"
+`include "encoder/keyboard/keyboard.v"
 
 module encoder(
     input wire [9:0] key,
