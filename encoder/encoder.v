@@ -18,7 +18,7 @@ keyboard convert_key(.keypad(key), .enablen(enbn), .D(D), .loadn(int_clear));
 debounce dbc(.clk(clk), .clear(int_clear), .out(mux_a));
 mod100 div(.clk(clk), .clk_mod(mux_b));
 
-mux mux2x1(.a(mux_a), .b(mux_b), .seletor(enablen), .out(pgt));
+mux mux2x1(.a(mux_a), .b(mux_b), .seletor(enbn), .out(pgt));
 
 assign loadn = int_clear;
 

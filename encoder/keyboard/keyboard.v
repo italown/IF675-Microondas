@@ -5,7 +5,6 @@ module keyboard(
     output wire loadn
 );
 
-parameter NULL = 4'd0;
 reg [3:0] press_buttom;
 wire valid_data;
 
@@ -22,21 +21,14 @@ begin
             10'b0000010000: press_buttom <= 4'd4;
             10'b0000001000: press_buttom <= 4'd3;
             10'b0000000100: press_buttom <= 4'd2;
-            10'b0000000010: press_buttom <= 4'd2;
-            10'b0000000001: press_buttom <= 4'd1;
-            10'b0000000000: press_buttom <= 4'd0;
-            default: press_buttom <= NULL;
+            10'b0000000010: press_buttom <= 4'd1;
+            10'b0000000001: press_buttom <= 4'd0;
         endcase
-    end
-    else
-    begin
-        press_buttom = NULL;
     end
 end
 
-assign valid_data = (press_buttom != NULL);
-
 assign D = press_buttom;
-assign loadn = valid_data;
+assign loadn = (keypad != 10'b0000000000);
 
 endmodule
+

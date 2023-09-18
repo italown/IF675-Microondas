@@ -19,7 +19,7 @@ begin
         end
     else
         begin
-            zerar = 0;
+            zerar <= 0;
         end
 end
 endmodule
