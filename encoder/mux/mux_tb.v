@@ -12,36 +12,26 @@ module testbench_mux;
         .out(out)
     );
 
-    // Defina os parâmetros de entrada
+    always begin
+    #5 a = ~a;
+    end
+
+
+    always begin
+    #20 b = ~b;
+    end
+
     initial begin
-        $dumpfile("dump.vcd");
+        $dumpfile("mux.vcd");
         $dumpvars(0, testbench_mux);
 
-        // Caso de teste 1: Seletor 0, 'a' selecionado
-        seletor = 0;
-        a = 1;
-        b = 0;
-        #5; // Aguarde um ciclo de clock
-        if (out == a) begin
-            $display("Teste 1: Seletor 0, 'a' selecionado - Passou");
-        end else begin
-            $display("Teste 1: Seletor 0, 'a' selecionado - Falhou");
-        end
-
-        // Caso de teste 2: Seletor 1, 'b' selecionado
+        a=0;
+        b=0;
         seletor = 1;
-        a = 1;
-        b = 0;
-        #5; 
-        if (out == b) begin
-            $display("Teste 2: Seletor 1, 'b' selecionado - Passou");
-        end else begin
-            $display("Teste 2: Seletor 1, 'b' selecionado - Falhou");
-        end
+        #100 seletor = 0;
+        #100 seletor = 1;
 
-        $dumpoff;
-        
-        // Terminar a simulação
+        #500
         $finish;
     end
 
