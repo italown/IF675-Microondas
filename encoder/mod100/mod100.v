@@ -11,8 +11,9 @@ assign clk_mod = zerar;
 
 always @(posedge clk)
 begin
-    cnt <= cnt + 1;
-    if (cnt == 7'd99)
+// mudei cnt <= cnt+2 e o if de 99 pra cnt == 7'd100
+    cnt <= cnt + 2;
+    if (cnt == 7'd100)
         begin
             zerar <= 1;
             cnt <= 0;

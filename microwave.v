@@ -22,17 +22,17 @@ module microwave(
     wire [3:0] timer_data;
     wire timer_done;
 
-    wire [3:0] sec_ones;
-    wire [3:0] sec_tens;
-    wire [3:0] min;
+    wire [3:0] sec_ones_input_BCD;
+    wire [3:0] sec_tens_input_BCD;
+    wire [3:0] min_input_BCD;
 
     control micro (.startn(startn), .stopn(stopn), .clearn(clearn), .door_closed(door_closed), .timer_done(timer_done), .mag_on(mag_output));
 
     encoder keyboard_input(.key(keypad), .enbn(mag_on), .clk(clock), .D(timer_data), .loadn(timer_loadn), .pgt(timer_clk));
 
-    timer main_timer(.number(timer_data), .loadn(timer_loadn), .clearn(clearn), .clock(timer_clk), .enable(mag_on), .sec_ones(sec_ones), .sec_tens(sec_tens), .mins(min), .zero(timer_done));
+    timer main_timer(.number(timer_data), .loadn(timer_loadn), .clearn(clearn), .clock(timer_clk), .enable(mag_on), .sec_ones(sec_ones_input_BCD), .sec_tens(sec_tens_input_BCD), .mins(min_input_BCD), .zero(timer_done));
 
-    decoder bcd(.sec_ones(sec_ones), .sec_tens(sec_tens), .mins(min), .sec_ones_bcd(sec_ones_segs), .sec_tens_bcd(sec_tens_segs), .mins_bcd(mins_segs));
+    decoder bcd(.sec_ones(sec_ones_input_BCD), .sec_tens(sec_tens_input_BCD), .mins(min_input_BCD), .sec_ones_bcd(sec_ones_segs), .sec_tens_bcd(sec_tens_segs), .mins_bcd(mins_segs));
 
 
 

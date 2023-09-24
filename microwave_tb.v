@@ -6,7 +6,6 @@ module microwave_tb;
     wire [6:0] sec_ones_segs, sec_tens_segs, mins_segs;
     wire mag_on;
 
-    // Instantiate the microwave module
     microwave uut (
         .startn(startn),
         .clearn(clearn),
@@ -35,16 +34,22 @@ module microwave_tb;
         door_closed=1;
         keypad= 10'b0000000000;
 
-        //2
-        #100 keypad = 10'b0000000100;
+        //1
+        #100 keypad = 10'b0000000010;
         #100 keypad = 10'b0000000000;
         
         #100 keypad = 10'b0000000010;
         #100 keypad = 10'b0000000000;
 
-        #100 startn=0;
+        #100 keypad = 10'b0000000001;
+        #100 keypad = 10'b0000000000;
 
-        #3000;
+        #100 startn=0;
+        #500 startn=1;
+        #10 stopn = 0;
+        #10 clearn = 0;
+
+        #800;
 
 
 

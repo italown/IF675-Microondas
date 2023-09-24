@@ -28,7 +28,7 @@ begin
 end
 
 assign D = press_buttom;
-assign loadn = (keypad != 10'b0000000000);
+assign loadn = (keypad == 10'b0000000000);
 
 endmodule
 
