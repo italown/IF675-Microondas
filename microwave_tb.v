@@ -37,7 +37,7 @@ module microwave_tb;
         //1
         #100 keypad = 10'b0000000010;
         #100 keypad = 10'b0000000000;
-        
+
         #100 keypad = 10'b0000000010;
         #100 keypad = 10'b0000000000;
 
@@ -45,9 +45,9 @@ module microwave_tb;
         #100 keypad = 10'b0000000000;
 
         #100 startn=0;
-        #500 startn=1;
-        #10 stopn = 0;
-        #10 clearn = 0;
+        #10 startn=1;
+        #800 
+        #1 door_closed = 0;
 
         #800;
 
