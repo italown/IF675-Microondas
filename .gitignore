@@ -2,3 +2,9 @@
 *.exe
 *.vcd
 *.
+/db
+/incremental_db
+/output_files
+*.txt
+*.qpf
+*.qsf

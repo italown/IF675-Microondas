@@ -7,40 +7,39 @@ module mod6_counter(
     output wire [3:0] output_number,
     output wire tc,
     output wire zero
-    );
+);
 
+reg[3:0] number;
 
-    reg[3:0] number;
-    assign output_number = number;
-    assign tc = ((number == 0) & enable) ? 1 : 0;
-    assign zero = (number == 0) ? 1 : 0;
+assign output_number = number;
+assign tc = ((number == 4'b0000) & enable) ? 1'b1 : 1'b0;
+assign zero = (number == 4'b0000) ? 1'b1 : 1'b0;
 
-    always@(posedge clock or negedge clearn)
+always @(posedge clock)
+begin
+    if (~enable)
+    begin
+        if (!loadn & !enable)
         begin
-            if(enable)
-                begin
-                    if(number == 4'd0)
-                        begin
-                            number <= 4'd5;
-                        end
-                    else
-                        begin
-                            number <= number-1;
-                        end
-                end
-            else
-                begin
-                    if(!loadn & !enable)
-                        begin
-                            number <= input_number;
-                        end
-                    end
-            if(!clearn & !enable)
-                begin
-                    number <= 4'd0;
-                end
-        end 
-endmodule
+            number <= input_number;
+        end
+    end
+    else
+    begin
+        if (number == 4'b0000)
+        begin
+            number <= 4'b0101;
+        end
+        else
+        begin
+            number <= number - 1;
+        end
+    end
 
-//Única diferença do mod10 pro mod6 é que a contagem decrementa a partir do 6.
-//Esse código faz a contagem descrescente de 9 até 1 enquanto o sinal de enable está ativo. 
+    if (!clearn & !enable)
+    begin
+        number <= 4'b0000;
+    end
+end
+
+endmodule
